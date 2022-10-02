@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 type IProps = {
     children?: React.ReactNode;
 };
@@ -5,13 +7,17 @@ type IProps = {
 const Layout: React.FC<IProps> = ({ children }) => {
     return (
         <div className="bg-back min-h-screen">
-            <header className="absolute top-0 left-0 p-5 w-full">
-                <a href="/">
-                    <img src="/logo.svg" alt="MUSE Logo" className="inline" />
-                </a>
+            <header className="sticky top-0 p-5 w-full">
+                <Link to="/">
+                    <img
+                        src={`${process.env.PUBLIC_URL}/logo.svg`}
+                        alt="MUSE Logo"
+                        className="inline"
+                    />
+                </Link>
             </header>
 
-            {children}
+            <main className="px-10 py-5">{children}</main>
         </div>
     );
 };

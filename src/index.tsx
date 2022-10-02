@@ -4,24 +4,25 @@ import "./index.css";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Track from "./pages/Track";
-import Error from "./pages/Error";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <Home />,
-        errorElement: <Error />,
-    },
-    {
-        path: "/search",
-        element: <Search />,
-    },
-    {
-        path: "/track/:trackId",
-        element: <Track />,
-    },
-]);
+const router = createBrowserRouter(
+    [
+        {
+            path: "/",
+            element: <Home />,
+        },
+        {
+            path: "/search",
+            element: <Search />,
+        },
+        {
+            path: "/track/:trackId",
+            element: <Track />,
+        },
+    ],
+    { basename: "/app/muse" }
+);
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
