@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import useTimeout from "../hooks/useTimeout";
+import Slider from "./Slider";
 
 type IProps = {
     name: string;
@@ -29,9 +31,17 @@ const ParameterRange: React.FC<IProps> = ({
         setLocalValue(value);
     }, [value]);
 
+    useTimeout(
+        () => {
+            onChange(localValue);
+        },
+        500,
+        [localValue.min, localValue.max]
+    );
+
     return (
         <div>
-            <div className="flex gap-2.5 justify-between mb-2.5">
+            <div className="flex gap-2.5 justify-between">
                 <h3 className="flex-shrink-0">{name}</h3>
 
                 <div className="flex gap-2.5 flex-grow-0">
@@ -67,36 +77,17 @@ const ParameterRange: React.FC<IProps> = ({
                 </div>
             </div>
 
-            <div className="relative h-px bg-white w-full my-2">
-                <div
-                    style={{
-                        left: `${
-                            ((localValue.min - min) * 100) / (max - min)
-                        }%`,
-                        right: `${
-                            100 - ((localValue.max - min) * 100) / (max - min)
-                        }%`,
-                    }}
-                    className="absolute h-full bg-primary"
-                ></div>
-
-                <div
-                    style={{
-                        left: `${
-                            ((localValue.min - min) * 100) / (max - min)
-                        }%`,
-                    }}
-                    className="absolute bg-primary rounded-full h-4 w-4 -translate-x-1/2 -translate-y-1/2 cursor-pointer hover:shadow-glow"
-                ></div>
-
-                <div
-                    style={{
-                        left: `${
-                            ((localValue.max - min) * 100) / (max - min)
-                        }%`,
-                    }}
-                    className="absolute bg-primary rounded-full h-4 w-4 -translate-x-1/2 -translate-y-1/2 cursor-pointer hover:shadow-glow"
-                ></div>
+            <div className="mt-5">
+                <Slider
+                    min={min}
+                    max={max}
+                    value={[localValue.min, localValue.max]}
+                    step={step}
+                    onChange={(val) =>
+                        setLocalValue({ min: val[0], max: val[1] })
+                    }
+                    label={name}
+                />
             </div>
         </div>
     );

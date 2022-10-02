@@ -7,7 +7,7 @@ type IProps = {
 const Layout: React.FC<IProps> = ({ children }) => {
     return (
         <div className="bg-back min-h-screen">
-            <header className="sticky top-0 p-5 w-full">
+            <header className="p-5 w-full">
                 <Link to="/">
                     <img
                         src={`${process.env.PUBLIC_URL}/logo.svg`}
