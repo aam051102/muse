@@ -1,13 +1,8 @@
 import React from "react";
+import Layout from "../components/Layout";
 
 const Track = () => {
-    return (
-        <div className="bg-back min-h-screen">
-            <div>
-                <img src="/logo.svg" alt="MUSE Logo" />
-            </div>
-        </div>
-    );
+    return <Layout></Layout>;
 };
 
 export default Track;

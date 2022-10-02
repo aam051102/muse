@@ -5,4 +5,20 @@
 body {
     margin: 0;
     font-family: "Source Code Pro";
+    color: #ffffff;
+}
+
+@layer components {
+    .std-button {
+        font-family: "Source Code Pro";
+        @apply bg-gradient-to-b from-primary to-primary-dark text-white font-normal px-5 py-2 rounded-sm-card ease-in-out duration-75 transition-shadow;
+    }
+
+    .std-button:hover {
+        @apply shadow-glow;
+    }
+
+    .std-button:active {
+        @apply bg-none bg-primary-dark;
+    }
 }

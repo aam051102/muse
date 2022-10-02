@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
 import Search from "./pages/Search";
 import Track from "./pages/Track";
 import Error from "./pages/Error";
@@ -13,10 +12,6 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
         errorElement: <Error />,
-    },
-    {
-        path: "/login",
-        element: <Login />,
     },
     {
         path: "/search",
