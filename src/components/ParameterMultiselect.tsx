@@ -23,7 +23,20 @@ const ParameterMultiselect: React.FC<IProps> = ({
 
     useTimeout(
         () => {
-            onChange(localValue);
+            let hasChanged = false;
+            for (
+                let i = 0;
+                i < Math.max(localValue.length, value.length);
+                i++
+            ) {
+                if (localValue[i] !== value[i]) {
+                    hasChanged = true;
+                }
+            }
+
+            if (hasChanged) {
+                onChange(localValue);
+            }
         },
         500,
         [localValue]

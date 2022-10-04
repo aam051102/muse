@@ -28,7 +28,7 @@ const Search: React.FC = () => {
     const [params, setParams] = useState<{
         loudness: { min: number; max: number };
         danceability: { min: number; max: number };
-        accousticness: { min: number; max: number };
+        acousticness: { min: number; max: number };
         instrumentalness: { min: number; max: number };
         liveness: { min: number; max: number };
         speechiness: { min: number; max: number };
@@ -42,7 +42,7 @@ const Search: React.FC = () => {
     }>({
         loudness: { min: -60, max: 0 },
         danceability: { min: 0, max: 1 },
-        accousticness: { min: 0, max: 1 },
+        acousticness: { min: 0, max: 1 },
         instrumentalness: { min: 0, max: 1 },
         liveness: { min: 0, max: 1 },
         speechiness: { min: 0, max: 1 },
@@ -76,8 +76,8 @@ const Search: React.FC = () => {
             min_danceability: params.danceability.min.toString(),
             max_danceability: params.danceability.max.toString(),
 
-            min_accousticness: params.accousticness.min.toString(),
-            max_accousticness: params.accousticness.max.toString(),
+            min_acousticness: params.acousticness.min.toString(),
+            max_acousticness: params.acousticness.max.toString(),
 
             min_instrumentalness: params.instrumentalness.min.toString(),
             max_instrumentalness: params.instrumentalness.max.toString(),
@@ -239,12 +239,12 @@ const Search: React.FC = () => {
                         />
 
                         <ParameterRange
-                            name="Accousticness"
-                            value={params.accousticness}
+                            name="acousticness"
+                            value={params.acousticness}
                             onChange={(value) =>
                                 setParams((thisParams) => ({
                                     ...thisParams,
-                                    accousticness: value,
+                                    acousticness: value,
                                 }))
                             }
                         />
