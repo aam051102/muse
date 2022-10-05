@@ -239,7 +239,7 @@ const Search: React.FC = () => {
                         />
 
                         <ParameterRange
-                            name="acousticness"
+                            name="Acousticness"
                             value={params.acousticness}
                             onChange={(value) =>
                                 setParams((thisParams) => ({

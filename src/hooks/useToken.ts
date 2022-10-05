@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { API_URL } from "../util";
@@ -5,7 +6,7 @@ import { API_URL } from "../util";
 const useToken = (): string | null => {
     let [searchParams] = useSearchParams();
     const [token, setToken] = useState<string | null>(null);
-    const [expiry, setExpiry] = useState<number | null>(null);
+    const [expiry, setExpiry] = useState<string | null>(null);
     const [refreshToken, setRefreshToken] = useState<string | null>(null);
 
     const fetchToken = useCallback(async () => {
@@ -30,12 +31,14 @@ const useToken = (): string | null => {
         if (!expiry) return;
 
         let timeout: NodeJS.Timeout;
+        const closeToExpiry = dayjs(expiry).subtract(5, "minutes");
+        const currentDate = dayjs();
 
-        if (new Date().getTime() > expiry - 1000 * 60 * 5) {
+        if (currentDate.isBefore(closeToExpiry)) {
             timeout = setTimeout(() => {
                 fetchToken();
-            }, expiry - 1000 * 60 * 5);
-        } else if (new Date().getTime() >= expiry) {
+            }, closeToExpiry.diff(currentDate));
+        } else if (currentDate.isAfter(closeToExpiry)) {
             fetchToken();
         }
 
@@ -63,13 +66,9 @@ const useToken = (): string | null => {
             localStorage.getItem("spotifyTokenExpiry");
         if (thisExpiry) {
             localStorage.setItem("spotifyTokenExpiry", thisExpiry);
-            setExpiry(Number(thisExpiry));
+            setExpiry(thisExpiry);
         }
     }, [searchParams]);
-
-    useEffect(() => {
-        fetchToken();
-    }, [fetchToken]);
 
     return token;
 };
