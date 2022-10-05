@@ -48,14 +48,12 @@ const useToken = (): string | null => {
     }, [expiry, fetchToken]);
 
     useEffect(() => {
-        const thisRefreshToken =
-            searchParams.get("refreshToken") ??
-            localStorage.getItem("spotifyRefreshToken");
-        if (thisRefreshToken) {
-            localStorage.setItem("spotifyRefreshToken", thisRefreshToken);
-            setRefreshToken(thisRefreshToken);
+        if (!token) {
+            fetchToken();
         }
+    }, [fetchToken, token]);
 
+    useEffect(() => {
         const thisToken = searchParams.get("token");
         if (thisToken) {
             setToken(thisToken);
@@ -67,6 +65,14 @@ const useToken = (): string | null => {
         if (thisExpiry) {
             localStorage.setItem("spotifyTokenExpiry", thisExpiry);
             setExpiry(thisExpiry);
+        }
+
+        const thisRefreshToken =
+            searchParams.get("refreshToken") ??
+            localStorage.getItem("spotifyRefreshToken");
+        if (thisRefreshToken) {
+            localStorage.setItem("spotifyRefreshToken", thisRefreshToken);
+            setRefreshToken(thisRefreshToken);
         }
     }, [searchParams]);
 
