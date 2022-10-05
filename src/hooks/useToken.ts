@@ -23,7 +23,6 @@ const useToken = (): string | null => {
         if (!refreshTokenRes) return;
 
         setToken(refreshTokenRes.token);
-        localStorage.setItem("spotifyTokenExpiry", refreshTokenRes.expiry);
         setExpiry(refreshTokenRes.expiry);
     }, [refreshToken]);
 
@@ -59,11 +58,8 @@ const useToken = (): string | null => {
             setToken(thisToken);
         }
 
-        const thisExpiry =
-            searchParams.get("expiry") ??
-            localStorage.getItem("spotifyTokenExpiry");
+        const thisExpiry = searchParams.get("expiry");
         if (thisExpiry) {
-            localStorage.setItem("spotifyTokenExpiry", thisExpiry);
             setExpiry(thisExpiry);
         }
 
