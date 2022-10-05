@@ -60,7 +60,10 @@ const Search: React.FC = () => {
 
     const fetchRecommendations = useCallback(async () => {
         if (!token) return;
-        if (params.category.length === 0) return;
+        if (params.category.length === 0) {
+            setRecommendations([]);
+            return;
+        }
 
         const currentCallTime = new Date().getTime();
         recommendationCallTimeRef.current = currentCallTime;
@@ -165,7 +168,17 @@ const Search: React.FC = () => {
         <Layout>
             <div className="flex gap-5 justify-between flex-wrap">
                 <div className="max-w-[60%] w-full">
-                    <h2 className="text-xl">Tracks</h2>
+                    <div className="flex justify-between items-center gap-5">
+                        <h2 className="text-xl">Tracks</h2>
+
+                        <button
+                            className="std-button"
+                            type="button"
+                            onClick={fetchRecommendations}
+                        >
+                            Reload
+                        </button>
+                    </div>
 
                     <div className="flex flex-col gap-5 mt-5">
                         {recommendations?.map((recommendation) => (
