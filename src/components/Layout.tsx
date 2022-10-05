@@ -8,7 +8,7 @@ const Layout: React.FC<IProps> = ({ children }) => {
     return (
         <div className="bg-back min-h-screen">
             <header className="p-5 w-full">
-                <Link to="/">
+                <Link to="/search">
                     <img
                         src={`${process.env.PUBLIC_URL}/logo.svg`}
                         alt="MUSE Logo"
