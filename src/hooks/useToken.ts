@@ -54,12 +54,9 @@ const useToken = (): string | null => {
 
     useEffect(() => {
         const thisToken = searchParams.get("token");
-        if (thisToken) {
-            setToken(thisToken);
-        }
-
         const thisExpiry = searchParams.get("expiry");
-        if (thisExpiry) {
+        if (thisExpiry && thisToken) {
+            setToken(thisToken);
             setExpiry(thisExpiry);
         }
 
