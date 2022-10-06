@@ -166,8 +166,8 @@ const Search: React.FC = () => {
 
     return (
         <Layout>
-            <div className="flex gap-5 justify-between flex-wrap">
-                <div className="max-w-[60%] w-full">
+            <div className="flex gap-20 lg:gap-5 justify-between flex-col-reverse lg:flex-row">
+                <div className="md:max-w-[60%] w-full">
                     <div className="flex justify-between items-center gap-5">
                         <h2 className="text-xl">Tracks</h2>
 
@@ -207,7 +207,7 @@ const Search: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="max-w-[30%] w-full sticky top-5">
+                <div className="lg:max-w-[30%] w-full">
                     <h2 className="text-xl">Parameters</h2>
 
                     <div className="flex flex-col gap-5 mt-5">
